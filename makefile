@@ -11,7 +11,7 @@
 CC = g++
 
 # Specify compiler flags
-CFLAGS = -Iinc -Idep -w -std=c++11 -lboost_system -lboost_filesystem -lpthread 
+CFLAGS = -Iinc -Idep -w -std=c++11  -lpthread 
 # Specify folder structure of project
 IDIR = inc
 ODIR = obj
