@@ -101,8 +101,11 @@ void Player::OptionSelect()
 void Player::BattleSequence()
 {
 	
-	int MonSel= rand()%2;
-	int Rattack=rand()%2;
+	srand((unsigned) time(0));
+	int Rattack=(rand()%2);
+	int MonSel=(rand()%2);
+	int dieRole=(rand()%6);
+
 	Pokemon battleMon;
 	int opt;
 
