@@ -122,7 +122,7 @@ void Player::BattleSequence()
 		cout<<"2. "<<battleMon.GetAttack2Name()<<endl; 
 		cout<<"3. Catch"<<endl; 
 		cin>>opt;
-			if(opt==1)
+			if(opt==1 && battleMon.GetAttack1Pow()>= dieRole)  
 			{
 				Mon[MonSel].SetHp(Mon[MonSel].GetHP()-battleMon.GetAttack1Pow());
 				cout<<battleMon.GetName()<<" used "<< battleMon.GetAttack1Name()<<endl;
@@ -169,6 +169,10 @@ void Player::BattleSequence()
 				cout<<battleMon.GetName()<<" has "<< battleMon.GetHP()<< " HP"<<endl;
 				cout<<endl;
 				}
+			}
+			else
+			{
+				cout<<"You Missed!"<<endl;
 			}
 	}
 
