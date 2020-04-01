@@ -182,6 +182,7 @@ void Player::BattleSequence()
 //This fucntion will only be calle when the randomizer >=2
 bool Player::TryCatch()
 {
+	srand((unsigned) time(0));
 	int Roll= rand()%6;
 	int YorN;
 	Pokemon battleMon;
