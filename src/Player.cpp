@@ -64,15 +64,15 @@ void Player::OptionSelect()
 	
 
 	
-	cout<<"What are we doing next?"<<endl;
-	cout<<"Press 1 to go to the Shop."<<endl;
-	cout<<"Press 2 to go to  YourBag."<<endl;
-	cout<<"Press 3 to go to Try&Catch."<<endl;
-	cout<<"Press 4 to go to TrainerBattle."<<endl;
+	std::cout<<"What are we doing next?"<<endl;
+	std::cout<<"Press 1 to go to the Shop."<<endl;
+	std::cout<<"Press 2 to go to  YourBag."<<endl;
+	std::cout<<"Press 3 to go to Try&Catch."<<endl;
+	std::cout<<"Press 4 to go to TrainerBattle."<<endl;
 	
 	
 		cin>>opt;
-		cout<<endl;
+		std::cout<<endl;
 	
 		if(opt==1)
 		{
@@ -101,60 +101,69 @@ void Player::OptionSelect()
 void Player::BattleSequence()
 {
 	
-	srand((unsigned) time(0));
-	int Rattack=(rand()%2);
-	int MonSel=(rand()%2);
-	int dieRole=(rand()%6);
+	srand(time(0));
+	int Rattack=rand()%2;
+	int MonSel=rand()%2;
+	int dieRole=rand()%6;
 
 	Pokemon battleMon;
 	int opt;
 
-	cout<<"You have encounterd a wild "<< Mon[MonSel].GetName()<<" !"<<endl;
+	std::cout<<"You have encounterd a wild "<< Mon[MonSel].GetName()<<" !"<<endl;
 		battleMon=bag.MonSelect();
-	cout<<"Lets go "<< battleMon.GetName()<<"!"<<endl;
-	cout<<"The battle has begun!"<<endl;
-	cout<<"What will "<< battleMon.GetName()<<" do?"<<endl;
+	std::cout<<"Lets go "<< battleMon.GetName()<<"!"<<endl;
+	std::cout<<"The battle has begun!"<<endl;
+	std::cout<<"What will "<< battleMon.GetName()<<" do?"<<endl;
 	
 	while(battleMon.GetHP()>=0 && Mon[MonSel].GetHP()>=0)
 	{
-		
-		std::cout<<"1. "<<battleMon.GetAttack1Name()<<endl;
-		cout<<"2. "<<battleMon.GetAttack2Name()<<endl; 
-		cout<<"3. Catch"<<endl; 
+		std::cout<<"What's the next move?"<<endl;	
+		std::cout<<"1. "<<battleMon.GetAttack1Name()<<" "<< battleMon.GetAttack1Pow()<<endl;
+		std::cout<<"2. "<<battleMon.GetAttack2Name()<<" "<<battleMon.GetAttack2Pow()<< endl; 
+		std::cout<<"3. Catch"<<endl; 
 		cin>>opt;
-			if(opt==1 && battleMon.GetAttack1Pow()>= dieRole)  
+		dieRole=rand()%6;
+
+			if(opt==1 && (battleMon.GetAttack1Pow() <= dieRole*10) )
 			{
+				cout<<"You chose " << battleMon.GetAttack1Name()<<endl;
+				cout<<"Time to roll the die."<<endl;
+				cout<<"Press enter to roll the die"<<endl;
+				cin.ignore();
+				cin.ignore();
+				std::cout<<"You rolled a "<<dieRole<<endl;
 				Mon[MonSel].SetHp(Mon[MonSel].GetHP()-battleMon.GetAttack1Pow());
-				cout<<battleMon.GetName()<<" used "<< battleMon.GetAttack1Name()<<endl;
-				cout<<"The oposing "<<Mon[MonSel].GetName()<<" has taken "<<battleMon.GetAttack1Pow()<<endl;
-				cout<<"The oposing "<<Mon[MonSel].GetName()<<" has "<< Mon[MonSel].GetHP()<< " HP"<<endl;
-				cout<<endl;
+				std::cout<<battleMon.GetName()<<" used "<< battleMon.GetAttack1Name()<<endl;
+				std::cout<<"The oposing "<<Mon[MonSel].GetName()<<" has taken "<<battleMon.GetAttack1Pow()<<endl;
+				std::cout<<"The oposing "<<Mon[MonSel].GetName()<<" has "<< Mon[MonSel].GetHP()<< " HP"<<endl;
+				std::cout<<"``````````````````````````` ````````````````````````````"<<endl;
+				std::cout<<endl;
 					if(Mon[MonSel].GetHP()<=0)
 					{
-						cout<<"You have defeated"<<Mon[MonSel].GetName()<<endl;
-						cout<<"(Press Enter to continue)"<< endl;
+						std::cout<<"You have defeated"<<Mon[MonSel].GetName()<<endl;
+						std::cout<<"(Press Enter to continue)"<< endl;
 						cin.ignore();
 						return ;
 					}
 				if(Rattack==1)
 				{
 				battleMon.SetHp(battleMon.GetHP()-Mon[MonSel].GetAttack1Pow());
-				cout<<Mon[MonSel].GetName()<<" used "<< Mon[MonSel].GetAttack1Name()<<endl;
-				cout<<"The oposing "<<Mon[MonSel].GetName()<<" attacked you with "<<Mon[MonSel].GetAttack1Name()<<endl;
-				cout<<battleMon.GetName()<<" has "<< battleMon.GetHP()<< " HP"<<endl;
-				cout<<endl;
+				std::cout<<Mon[MonSel].GetName()<<" used "<< Mon[MonSel].GetAttack1Name()<<endl;
+				std::cout<<"The oposing "<<Mon[MonSel].GetName()<<" attacked you with "<<Mon[MonSel].GetAttack1Name()<<endl;
+				std::cout<<battleMon.GetName()<<" has "<< battleMon.GetHP()<< " HP"<<endl;
+				std::cout<<endl;
 					
 					if(battleMon.GetHP()<=0)
 					{
-						cout<<battleMon.GetName()<<" Has been defeated!"<<endl;
+						std::cout<<battleMon.GetName()<<" Has been defeated!"<<endl;
 							if(bag.NoOneLeft()==0)
 							{
-								cout<<"You have no Pokimanleft to battle"<<endl;
-								cout<<"Lets try this again."<<endl;
+								std::cout<<"You have no Pokimanleft to battle"<<endl;
+								std::cout<<"Lets try this again."<<endl;
 								return;
 					
 							}
-						cout<<"(Press Enter to continue)"<< endl;
+						std::cout<<"(Press Enter to continue)"<< endl;
 						cin.ignore();
 						return ;
 					}				
@@ -164,15 +173,21 @@ void Player::BattleSequence()
 				if(Rattack==2)
 				{
 				battleMon.SetHp(battleMon.GetHP()-Mon[MonSel].GetAttack2Pow());
-				cout<<Mon[MonSel].GetName()<<" used "<< Mon[MonSel].GetAttack2Name()<<endl;
-				cout<<"The oposing "<<Mon[MonSel].GetName()<<" attacked you with "<<Mon[MonSel].GetAttack2Pow()<<endl;
-				cout<<battleMon.GetName()<<" has "<< battleMon.GetHP()<< " HP"<<endl;
-				cout<<endl;
+				std::cout<<Mon[MonSel].GetName()<<" used "<< Mon[MonSel].GetAttack2Name()<<endl;
+				std::cout<<"The oposing "<<Mon[MonSel].GetName()<<" attacked you with "<<Mon[MonSel].GetAttack2Pow()<<endl;
+				std::cout<<battleMon.GetName()<<" has "<< battleMon.GetHP()<< " HP"<<endl;
+				std::cout<<endl;
 				}
 			}
 			else
 			{
-				cout<<"You Missed!"<<endl;
+				cout<<"You chose " << battleMon.GetAttack1Name()<<endl;
+				cout<<"Time to roll the die."<<endl;
+				cout<<"Press enter to roll the die"<<endl;
+				cin.ignore();
+				cin.ignore();
+				std::cout<<"Your Roll was a "<< dieRole<<endl;
+				std::cout<<"You Missed!"<<endl;
 			}
 	}
 
@@ -182,25 +197,28 @@ void Player::BattleSequence()
 //This fucntion will only be calle when the randomizer >=2
 bool Player::TryCatch()
 {
-	srand((unsigned) time(0));
+	srand( time(0));
 	int Roll= rand()%6;
 	int YorN;
 	Pokemon battleMon;
 	
 	
-	cout<<"Lets try an catch some PokiMan!"<<endl;
-	cout<<"Time to roll the Die"<<endl;
+	std::cout<<"Lets try an catch some PokiMan!"<<endl;
+	std::cout<<"Time to roll the Die"<<endl;
+	std::cout<<"Press enter to roll the die"<<endl;
+	cin.ignore();
+	cin.ignore();
 		if(Roll>=2)
 		{
-			cout<<"You rolled a "<< Roll<< " ! Let the battle begin."<<endl;
+			std::cout<<"You rolled a "<< Roll<< " ! Let the battle begin."<<endl;
 				Player::BattleSequence();
-				cout<<endl;
+				std::cout<<endl;
 		}
 		
 		if(Roll<2)
 		{
-			cout<<"You rolled a "<<Roll<< " ! Better luck next time."<<endl;
-			cout<<endl;
+			std::cout<<"You rolled a "<<Roll<< " ! Better luck next time."<<endl;
+			std::cout<<endl;
 			
 		}
 }
