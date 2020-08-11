@@ -25,6 +25,8 @@ public:
 	
 	void PlayerName();
 
+	int DieRoll();
+
 	int GetResponse();
 
 	int GetOption();

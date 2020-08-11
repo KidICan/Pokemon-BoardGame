@@ -23,16 +23,26 @@ void Bag::AddItm(string x, int y)
 	}
 
 int Bag::InsideBag(){	
-		bool isRunning;
 		int opt;
-
-		cout<<"You have"<< endl<<Items.at("pokeball")<< " Pokibals"<<endl<< Items.at("potion")<<" Potions"<<endl<< Items.at("hyper_potion")<< " HyperPotions"<<endl;
-		cout<<" Select the item you want to use."<<endl;
-		cout<<"1 for Pokibal"<<endl;
-		cout<<"2 for Potion"<<endl;
-		cout<<"3 for HyperPotions"<<endl;
+		cout<<"Would you like to see your pokiman or see your items?"<<endl;
+		cout<<"1. Pokiman"<<endl;
+		cout<<"2. Items"<<endl;
+		cout<<"Press 1 for Pokiman, 2 for items";
 		cin>>opt;
-		cout<<endl;
+		if(opt ==1)
+		{
+			ViewCatchedMon();
+		}
+
+		if(opt ==2)
+		{
+			cout<<"You have"<< endl<<Items.at("pokeball")<< " Pokibals"<<endl<< Items.at("potion")<<" Potions"<<endl<< Items.at("hyper_potion")<< " HyperPotions"<<endl;
+			cout<<" Select the item you want to use."<<endl;
+			cout<<"1 for Pokibal"<<endl;
+			cout<<"2 for Potion"<<endl;
+			cout<<"3 for HyperPotions"<<endl;
+			cin>>opt;
+			cout<<endl;
 						
 			if(opt== 1)
 			{
@@ -48,7 +58,7 @@ int Bag::InsideBag(){
 			{
 				return Items.at("hyper_potion") ;		
 			}
-			
+		}
 }
 
 int Bag::GetMoney(){
@@ -73,9 +83,10 @@ int Bag::ViewCatchedMon(){
 		return 0;
 	}
 	
-	cout<<"The Mon that you have catched are "<<endl;
+	cout<<"The Mon that you have catched are: "<<endl;
 		for(int i=0; i<PlayerMon.size(); i++){
-				cout<<PlayerMon[i].GetName() <<endl;
+				cout<< "Lv. "<< PlayerMon[i].GetLvl()<< " "<<PlayerMon[i].GetName() << "  Hp. "<< PlayerMon[i].GetHP()<<endl;
+				cout<<"Exp. "<<PlayerMon[i].GetExp()<<endl;
 			}	
 		return PlayerMon.size();	
 }

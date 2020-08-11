@@ -13,10 +13,11 @@ public:
 	std::string attack1Name;
 	int attack2Pow;
 	std::string attack2Name;
-	
+	int exp;
+	int level;
 	Pokemon();
 
-	Pokemon(std::string, int, std::string, int, std::string, int);
+	Pokemon(std::string, int, std::string, int, std::string, int, int, int);
 
 	
 	
@@ -27,7 +28,7 @@ public:
 	virtual void  SetName(std::string);
 	
 	virtual int GetHP();
-	
+
 	virtual void SetHp(int );
 
 	virtual int GetAttack1Pow();
@@ -45,7 +46,14 @@ public:
 	virtual  void SetAttack2Pow(int);
 		
 	virtual void SetAttack2Name(std::string);
-		
+
+	virtual int SetExp(int,int,int);
+
+	virtual int GetExp();
+
+	virtual void SetLvl();
+
+	virtual int GetLvl();
 };
 
 #endif

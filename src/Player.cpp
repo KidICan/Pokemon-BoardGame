@@ -1,6 +1,7 @@
 #include <Player.h>
 #include <Shop.h>
 #include <Bag.h>
+#include <CPU.h>
 #include <iostream>
 
 
@@ -23,6 +24,13 @@ void Player::GetName(){
 	std::string n;
 		std::cin>>n;
 		this->name=n;
+}
+
+int Player::DieRoll()
+{
+	srand(time(0));
+	int dieRole=rand()%6;
+	return dieRole;
 }
 
 void Player:: PlayerName(){
@@ -100,16 +108,20 @@ void Player::OptionSelect()
 
 void Player::BattleSequence()
 {
-	
+	//Here we randomize the roll and the pokemon selection.
 	srand(time(0));
+	int PlayerRoll;
 	int Rattack=rand()%2;
 	int MonSel=rand()%2;
-	int dieRole=rand()%6;
-
+//Here we define a pokemons variable to access the players pokemon
 	Pokemon battleMon;
+	int ExpPott;
 	int opt;
-
+	//Here we start to find the wild pokiman in out Mon vector and select.
 	std::cout<<"You have encounterd a wild "<< Mon[MonSel].GetName()<<" !"<<endl;
+		//Now we get the hp that the oposing Mon.
+		ExpPott=Mon[MonSel].GetHP();
+		//Here the player chooses the pokemon inside his bag.
 		battleMon=bag.MonSelect();
 	std::cout<<"Lets go "<< battleMon.GetName()<<"!"<<endl;
 	std::cout<<"The battle has begun!"<<endl;
@@ -122,62 +134,38 @@ void Player::BattleSequence()
 		std::cout<<"2. "<<battleMon.GetAttack2Name()<<" "<<battleMon.GetAttack2Pow()<< endl; 
 		std::cout<<"3. Catch"<<endl; 
 		cin>>opt;
-		dieRole=rand()%6;
+		PlayerRoll=DieRoll();
 
-			if(opt==1 && (battleMon.GetAttack1Pow() <= dieRole*10) )
+			if(opt==1 && (battleMon.GetAttack1Pow() <= PlayerRoll*10) )
 			{
+				//Once the we are able to be able to attack we choose the pokemon. 
 				cout<<"You chose " << battleMon.GetAttack1Name()<<endl;
 				cout<<"Time to roll the die."<<endl;
 				cout<<"Press enter to roll the die"<<endl;
 				cin.ignore();
 				cin.ignore();
-				std::cout<<"You rolled a "<<dieRole<<endl;
+				std::cout<<"You rolled a "<<PlayerRoll<<endl;
 				Mon[MonSel].SetHp(Mon[MonSel].GetHP()-battleMon.GetAttack1Pow());
 				std::cout<<battleMon.GetName()<<" used "<< battleMon.GetAttack1Name()<<endl;
 				std::cout<<"The oposing "<<Mon[MonSel].GetName()<<" has taken "<<battleMon.GetAttack1Pow()<<endl;
 				std::cout<<"The oposing "<<Mon[MonSel].GetName()<<" has "<< Mon[MonSel].GetHP()<< " HP"<<endl;
 				std::cout<<"``````````````````````````` ````````````````````````````"<<endl;
 				std::cout<<endl;
-					if(Mon[MonSel].GetHP()<=0)
-					{
-						std::cout<<"You have defeated"<<Mon[MonSel].GetName()<<endl;
-						std::cout<<"(Press Enter to continue)"<< endl;
-						cin.ignore();
-						return ;
-					}
-				if(Rattack==1)
+					//This sequence is played once the oposing Mon is defeted
+				if(Mon[MonSel].GetHP()<=0)
 				{
-				battleMon.SetHp(battleMon.GetHP()-Mon[MonSel].GetAttack1Pow());
-				std::cout<<Mon[MonSel].GetName()<<" used "<< Mon[MonSel].GetAttack1Name()<<endl;
-				std::cout<<"The oposing "<<Mon[MonSel].GetName()<<" attacked you with "<<Mon[MonSel].GetAttack1Name()<<endl;
-				std::cout<<battleMon.GetName()<<" has "<< battleMon.GetHP()<< " HP"<<endl;
-				std::cout<<endl;
-					
-					if(battleMon.GetHP()<=0)
-					{
-						std::cout<<battleMon.GetName()<<" Has been defeated!"<<endl;
-							if(bag.NoOneLeft()==0)
-							{
-								std::cout<<"You have no Pokimanleft to battle"<<endl;
-								std::cout<<"Lets try this again."<<endl;
-								return;
-					
-							}
-						std::cout<<"(Press Enter to continue)"<< endl;
-						cin.ignore();
-						return ;
-					}				
+					std::cout<<"You have defeated "<<Mon[MonSel].GetName()<<endl;
+					std::cout<<battleMon.GetName()<< " exp increased by " <<battleMon.SetExp(battleMon.GetExp(), ExpPott, Mon[MonSel].GetLvl())<<endl;
+					battleMon.SetExp(battleMon.GetExp(), ExpPott, Mon[MonSel].GetLvl());
+					std::cout<<"(Press Enter to continue)"<< endl;
+					cin.ignore();
+					return ;
 				}
 
-					
-				if(Rattack==2)
-				{
-				battleMon.SetHp(battleMon.GetHP()-Mon[MonSel].GetAttack2Pow());
-				std::cout<<Mon[MonSel].GetName()<<" used "<< Mon[MonSel].GetAttack2Name()<<endl;
-				std::cout<<"The oposing "<<Mon[MonSel].GetName()<<" attacked you with "<<Mon[MonSel].GetAttack2Pow()<<endl;
-				std::cout<<battleMon.GetName()<<" has "<< battleMon.GetHP()<< " HP"<<endl;
-				std::cout<<endl;
-				}
+				
+				//Gere its the CPUs turn to attack
+				CPUAttack(Rattack,MonSel,battleMon);
+				
 			}
 			else
 			{
@@ -186,8 +174,9 @@ void Player::BattleSequence()
 				cout<<"Press enter to roll the die"<<endl;
 				cin.ignore();
 				cin.ignore();
-				std::cout<<"Your Roll was a "<< dieRole<<endl;
+				std::cout<<"Your Roll was a "<< PlayerRoll<<endl;
 				std::cout<<"You Missed!"<<endl;
+				CPUAttack(Rattack, MonSel, battleMon);
 			}
 	}
 
@@ -197,8 +186,7 @@ void Player::BattleSequence()
 //This fucntion will only be calle when the randomizer >=2
 bool Player::TryCatch()
 {
-	srand( time(0));
-	int Roll= rand()%6;
+	int Roll= DieRoll();
 	int YorN;
 	Pokemon battleMon;
 	
