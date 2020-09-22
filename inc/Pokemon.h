@@ -2,24 +2,39 @@
 #define POKEMON_H
 #include <string>
 
-typedef class Pokemon{
+typedef class Move{
 
+public:
+    std::string name;
+    int power;
+    int roll;
+
+    Move();
+    Move(string, int, int);
+    
+    virtual std::string getName();
+    
+    virtual int getPower();
+    
+    virtual int getRoll();
+};
+
+typedef class Pokemon{
 
 public:
 	
 	std::string name;
-	int Hp;
-	int attack1Pow;
-	std::string attack1Name;
-	int attack2Pow;
-	std::string attack2Name;
+	int hp;
+    int mhp;
+    int atk;
+    Move move1;
+    Move move2;
 	int exp;
-	int level;
+	int lvl;
+    
 	Pokemon();
 
-	Pokemon(std::string, int, std::string, int, std::string, int, int, int);
-
-	
+	Pokemon(std::string, int, int, int, Move, Move);
 	
 	//We can get and set the values for the creation of new pokemon here
 	
@@ -31,29 +46,13 @@ public:
 
 	virtual void SetHp(int );
 
-	virtual int GetAttack1Pow();
+	virtual void ModifyExp(int);
 
-	virtual std::string GetAttack1Name();
-
-	virtual void SetAttack1Pow(int);
-		
-	virtual void SetAttack1Name(std::string);
-		
-	virtual int GetAttack2Pow();
-			
-	virtual std::string GetAttack2Name();
-		
-	virtual  void SetAttack2Pow(int);
-		
-	virtual void SetAttack2Name(std::string);
-
-	virtual int SetExp(int,int,int);
-
-	virtual int GetExp();
-
-	virtual void SetLvl();
+    virtual int GetExp();
 
 	virtual int GetLvl();
+    
+    virtual void LevelUp();
 };
 
 #endif
