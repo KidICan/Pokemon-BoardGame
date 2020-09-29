@@ -14,7 +14,6 @@ Player player1;
 Player::Player(){
     name="Player";
     gender=0;
-	YorN=0;
 	opt=0;
 }
 
@@ -36,16 +35,6 @@ int Player::DieRoll()
 void Player:: PlayerName(){
 	std::cout<<name;
 }	
-
-void Player::SetResponse(){
-	int res;
-	cin>>res;	
-	this->YorN=res;
-}
-
-int Player::GetResponse(){
-	return YorN;
-}
 
 void Player::SetOption(){
 	int res;
@@ -104,6 +93,24 @@ void Player::OptionSelect()
 		}
 	
 }
+
+/*We are going to shoot for this as the battle sequence
+//true = trainer, false = wild
+void Player:: BattleSequence(bool mode, int numMon){
+vector<Pokemon> enemies;
+for (int i = 0; i < numMon; i++){
+  srand(time(0));
+  int j = rand() % pokeDict.size();
+  iterator t = pokeDict.begin();
+  advance(t, j);
+  enemies.add(new Pokemon (t->second));
+}
+...
+if (!mode){
+//display Catch option
+}
+}
+*/
 
 
 void Player::BattleSequence()
@@ -187,7 +194,6 @@ void Player::BattleSequence()
 bool Player::TryCatch()
 {
 	int Roll= DieRoll();
-	int YorN;
 	Pokemon battleMon;
 	
 	
