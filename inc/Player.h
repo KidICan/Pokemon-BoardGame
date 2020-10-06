@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <Pokemon.h>
 using namespace std;
 
 
@@ -43,9 +44,9 @@ public:
 
 	bool TryCatch();
 
-	void BattleSequence();
-
-
+	void BattleSequence(bool, int);
+    
+    int Battle(Pokemon, Pokemon, Move);
 
 };
 
