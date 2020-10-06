@@ -8,19 +8,19 @@
 #include <Pokemon.h>
 #include <Player.h>
 #include <Bag.h>
+#include <Inits.h>
+#include <map>
 using namespace std;
 
 int main()
 {
-	
 	extern Player player1;
 	extern Bag bag;
     extern vector<Pokemon> Mon;
     extern map<string, Move> moveDict;
     extern map<string, Pokemon> pokeDex;
     
-    moveDict = initMoves();
-    pokeDex = initMon();
+    extern Inits repo;
 
 	cout<<"Welcome to the World of Pokiman. (Press Enter to continue)"<< endl;
 	cin.ignore();
@@ -161,29 +161,4 @@ int main()
 	
 	cout<<"Before anything you should go to the shop and buy some Pokiballs and potions. You wont be able to go through out your journey with out them."<<endl;
 		player1.OptionSelect();		
-}
-
-map<string, Move> initMoves(){
-    map<string, Move> tMap;
-    
-    //all moves will currently have base 5 power value.
-    tMap["Psyshock"] = new Move ("Psyshock", 5, 6);
-    
-    tMap["Mind Strike"] = new Move ("Mind Strike", 5, 4);
-    
-    tMap["Bash"] = new Move ("Bash", 5, 2);
-    
-    tMap["Electrocute"] = new Move ("Electrocute", 5, 5);
-    
-    return tMap;
-}
-
-map<string, Pokemon> initMon(){
-    map<string, Pokemon> tMon;
-    
-    tMon["Mewtwo"] =  new Pokemon ("Mewtwo", 1, 75, 5, moveDict["Psyshock"], moveDict["Mind Strike"]);
-    
-    tMon["Mew"] = new Pokemon ("Mew", 1, 100, 5, moveDict["Electrocute"], moveDict["Bash"]);
-    
-    return tMon;
 }
