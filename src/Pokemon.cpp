@@ -4,12 +4,6 @@
 #include <vector>
 using namespace std;
 
-	
-	//Pokemon Mew("Mew",100,"Befriend",25,"Tag",50,0,1);
-	//Pokemon Mewtwo("MewTwo",75,"Physchock",60,"MindStrike",40,0,1);
-
-	//std::vector<Pokemon> Mon{Mew,Mewtwo};
-
 Move::Move(){
     name = "";
     power = 0;
@@ -57,13 +51,24 @@ Pokemon::Pokemon(string n, int l, int max, int a, Move m1, Move m2){
     exp = 0;
 }
 
+Pokemon::Pokemon(Pokemon x){
+    name = x.name;
+    lvl = x.lvl;
+    mhp = x.mhp;
+    hp = mhp;
+    atk = x.atk;
+    move1 = x.move1;
+    move2 = x.move2;
+    exp = 0;
+}
+
 std::string Pokemon::GetName()
 {
    return name;
  }
 
  
-void  Pokemon::SetName(std::string name)
+void Pokemon::SetName(std::string name)
 {
 	this->name=name;
 }
@@ -76,6 +81,15 @@ void Pokemon::SetHp(int Hp)
 int Pokemon::GetHP()
 {
 	return Hp;
+}
+
+Move Pokemon::getMove(int n){
+    if (n == 1){
+        return move1;
+    }
+    else{
+        return move2;
+    }
 }
 
 void Pokemon::modifyEXP(int oppLvl){
