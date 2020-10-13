@@ -10,7 +10,7 @@ public:
     int roll;
 
     Move();
-    Move(string, int, int);
+    Move(std::string, int, int);
     
     virtual std::string getName();
     
@@ -35,18 +35,20 @@ public:
 	Pokemon();
 
 	Pokemon(std::string, int, int, int, Move, Move);
-	
-	//We can get and set the values for the creation of new pokemon here
-	
+    
+    Pokemon(const Pokemon&);
+    
 	virtual std:: string GetName();
  
-	virtual void  SetName(std::string);
+	virtual void SetName(std::string);
 	
 	virtual int GetHP();
+    
+    virtual Move getMove(int);
 
 	virtual void SetHp(int );
 
-	virtual void ModifyExp(int);
+    virtual void ModifyEXP(int);
 
     virtual int GetExp();
 

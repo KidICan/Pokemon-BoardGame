@@ -28,11 +28,7 @@ public:
 
 	int DieRoll();
 
-	int GetResponse();
-
 	int GetOption();
-
-	void SetResponse();
 	
 	void SetOption();
 
