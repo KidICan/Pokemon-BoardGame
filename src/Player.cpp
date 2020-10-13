@@ -3,12 +3,12 @@
 #include <Bag.h>
 #include <Inits.h>
 #include <iostream>
+#include <iterator>
 
-
+extern Player player1;
 extern Bag bag;
-extern std::vector<Pokemon> Mon;
-
-Player player1;
+extern vector<Pokemon> Mon;
+extern Inits repo;
 
 Player::Player(){
     name="Player";
@@ -97,10 +97,11 @@ void Player::BattleSequence(bool mode, int numMon)
     vector<Pokemon> enemies;
     for (int i = 0; i < numMon; i++){
         srand(time(0));
-        int j = rand() % pokeDict.size();
-        iterator t = pokeDict.begin();
+        int j = rand() % repo.dMon.size();
+        map<string, Pokemon>::iterator t = repo.dMon.begin();
         advance(t, j);
-        enemies.push(new Pokemon (t->second));
+        Pokemon temp = t->second;
+        enemies.push_back(temp);
     }
     
     srand(time(0));
@@ -126,7 +127,7 @@ void Player::BattleSequence(bool mode, int numMon)
     Move selected;
     int damage;
     
-    while(battleMon.GetHP() > 0 && enemyMon.GetHP() > 0 && enemies.size >= 1)
+    while(battleMon.GetHP() > 0 && enemyMon.GetHP() > 0 && enemies.size() >= 1)
     {
         if (yourTurn)
         {
@@ -150,7 +151,7 @@ void Player::BattleSequence(bool mode, int numMon)
             
             //check if opt is 1-2 or 3-4 to include different behavior for Catch() and Bag()
             selected = battleMon.getMove(opt);
-            cout << "You chose " << selected << " ." << endl;
+            cout << "You chose " << selected.getName() << " ." << endl;
             cout << "Time to roll the die." << endl;
             PlayerRoll = DieRoll();
             

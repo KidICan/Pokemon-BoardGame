@@ -29,15 +29,14 @@ int Move::getRoll(){
 }
 	
 Pokemon::Pokemon(){
-	name="po";
-    Mhp=0;
-    Hp=Mhp;
-    attack1Pow=0;
-    attack1Name="a";
-	attack2Pow=0;
-	attack2Name="b";
-	exp=0;
-	level=1;
+    name = "po";
+    mhp = 0;
+    hp = mhp;
+    atk = 0;
+    move1 = Move("move1",0,0);
+    move2 = Move("move2",0,0);
+    exp = 0;
+    lvl = 1;
 }
 
 Pokemon::Pokemon(string n, int l, int max, int a, Move m1, Move m2){
@@ -51,7 +50,7 @@ Pokemon::Pokemon(string n, int l, int max, int a, Move m1, Move m2){
     exp = 0;
 }
 
-Pokemon::Pokemon(Pokemon x){
+Pokemon::Pokemon(const Pokemon &x){
     name = x.name;
     lvl = x.lvl;
     mhp = x.mhp;
@@ -73,14 +72,14 @@ void Pokemon::SetName(std::string name)
 	this->name=name;
 }
 
-void Pokemon::SetHp(int Hp)
+void Pokemon::SetHp(int h)
 {
-	this->Hp=Hp;
+	this->hp = h;
 }
 
 int Pokemon::GetHP()
 {
-	return Hp;
+	return hp;
 }
 
 Move Pokemon::getMove(int n){
@@ -92,7 +91,7 @@ Move Pokemon::getMove(int n){
     }
 }
 
-void Pokemon::modifyEXP(int oppLvl){
+void Pokemon::ModifyEXP(int oppLvl){
     int temp = exp + 30 * (oppLvl/lvl);
     if (temp > 100){
         exp = 100 - temp;
@@ -109,10 +108,18 @@ int Pokemon::GetExp()
 
 int Pokemon::GetLvl()
 {
-	return level;	
+	return lvl;
 }
 
 void Pokemon::LevelUp()
 {
-	level+=1;
+	lvl+=1;
 }
+
+
+
+
+	
+
+
+

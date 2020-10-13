@@ -12,15 +12,20 @@
 #include <map>
 using namespace std;
 
+Player player1;
+Bag bag;
+Inits repo;
+vector<Pokemon> Mon;
+
 int main()
 {
+    
+    /*
 	extern Player player1;
 	extern Bag bag;
     extern vector<Pokemon> Mon;
-    extern map<string, Move> moveDict;
-    extern map<string, Pokemon> pokeDex;
-    
     extern Inits repo;
+     */
 
 	cout<<"Welcome to the World of Pokiman. (Press Enter to continue)"<< endl;
 	cin.ignore();
@@ -35,10 +40,10 @@ int main()
 		player1.PlayerName();
 	cout<<" ?"<<endl;
 	cout<< " If it's not, press 0, if it is, press 1"<<endl;
-		player1.SetResponse();
+		player1.SetOption();
 	cout<<endl;
 	
-		while(player1.GetResponse()== 0)
+		while(player1.GetOption()== 0)
 		{
 			
 			cout<<"Sorry, my bad, what's your name?"<<endl;
@@ -48,7 +53,7 @@ int main()
 			cout<<"Is ";
 			player1.PlayerName();
 			cout<<" correct ? 0 for no, 1 for yes"<<endl;
-			player1.SetResponse(); 
+			player1.SetOption();
 			cout<<endl;
 			
 		}
@@ -71,9 +76,9 @@ int main()
 			cout << "girl";
 	cout<<" ?"<<endl;
 	cout<< " If it's not true, press 0, if it is, press 1"<<endl;
-		player1.SetResponse();
+		player1.SetOption();
 	cout<<endl;
-		while(player1.GetResponse()== 0)
+		while(player1.GetOption()== 0)
 		{
 			cout<< "Sorry about that. Let's try that again "<<endl;
 			cout<<" If you are a boy press 1, if your a girl press 0."<< endl;
@@ -85,7 +90,7 @@ int main()
 				else
 					cout << "girl";
 			cout<<"? Is that right? 0 for no, 1 for yes."<<endl;
-			player1.SetResponse();
+			player1.SetOption();
 			cout<<endl;
 		}
 	
@@ -109,15 +114,15 @@ int main()
 		{
 			cout<<"You have chosen "<<Mon[0].GetName()<<endl;
 			cout<<"Are you sure about this? 1 for yes, 0 for no. "<<endl;
-				player1.SetResponse();
+				player1.SetOption();
 				cout<<endl;
-					if(player1.GetResponse()==1)
+					if(player1.GetOption()==1)
 					{
 						cout<<Mon[0].GetName()<<" is now your new Pokiman Companion!!"<<endl;
 						bag.AddCatched(Mon[0]);
 					}
 								
-					if(player1.GetResponse()==0)
+					if(player1.GetOption()==0)
 					{
 						cout<<"Ok, not "<<Mon[0].GetName()<<endl;
 						
@@ -129,15 +134,15 @@ int main()
 		{
 			cout<<"You have chosen "<<Mon[1].GetName()<<endl;
 			cout<<"Are you sure about this? 1 for yes, 0 for no. "<<endl;
-				player1.SetResponse();
+				player1.SetOption();
 				cout<<endl;
-					if(player1.GetResponse()==1)
+					if(player1.GetOption()==1)
 					{
 						cout<<Mon[1].GetName()<<" is now your new Pokiman Companion!!"<<endl;
 						bag.AddCatched(Mon[1]);
 					}
 								
-					if(player1.GetResponse()==0)
+					if(player1.GetOption()==0)
 					{
 						cout<<"Ok, not " << Mon[1].GetName()<<endl;
 					}
