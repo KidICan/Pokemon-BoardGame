@@ -44,7 +44,7 @@ public:
 
 	void BattleSequence(bool, int);
     
-    int Battle(Pokemon, Pokemon, Move);
+    //int Battle(Pokemon, Pokemon, Move);
 
 };
 
