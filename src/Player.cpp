@@ -4,6 +4,7 @@
 #include <Inits.h>
 #include <iostream>
 #include <iterator>
+#include <queue>
 
 extern Player player1;
 extern Bag bag;
@@ -108,22 +109,22 @@ void Player::OptionSelect()
 void Player::BattleSequence(bool mode, int numMon)
 {
     //Here we randomize the roll and the pokemon selection.
-    vector<Pokemon> enemies;
+    queue <Pokemon> enemies;
     for (int i = 0; i < numMon; i++){
         srand(time(0));
         int j = rand() % repo.dMon.size();
         map<string, Pokemon>::iterator t = repo.dMon.begin();
         advance(t, j);
         Pokemon temp = t->second;
-        enemies.push_back(temp);
+        enemies.push(temp);
     }
     
     srand(time(0));
     int PlayerRoll;
     //Here we define a pokemons variable to access the players pokemon
     Pokemon battleMon;
-    Pokemon enemyMon = enemies[0];
-    int opt;
+    Pokemon enemyMon = enemies.front();
+    int opt = 0;
     //Here we start to find the wild pokiman in out Mon vector and select.
     
     if (!mode){
@@ -138,14 +139,14 @@ void Player::BattleSequence(bool mode, int numMon)
     std::cout<<"Let's go " << battleMon.GetName() << "!" << endl;
     
     bool yourTurn = true;
-    Move selected;
+    bool enemyDefeated = false;
+    Move selectedMove;
     int damage;
     
     while(battleMon.GetHP() > 0 && enemyMon.GetHP() > 0 && enemies.size() >= 1)
     {
         if (yourTurn)
         {
-            opt = 0;
             std::cout<< "What will " << battleMon.GetName() << " do?" << endl;
             std::cout<< "1. " << battleMon.getMove(1).getName() << " - " << battleMon.getMove(1).getRoll() <<endl;
             std::cout<< "2. " << battleMon.getMove(2).getName() << " - " << battleMon.getMove(2).getRoll() <<endl;
@@ -158,16 +159,15 @@ void Player::BattleSequence(bool mode, int numMon)
                 std::cout<< "Please input one of the following." << endl;
                 std::cout<< "1. " << battleMon.getMove(1).getName() << " - " << battleMon.getMove(1).getRoll() <<endl;
                 std::cout<< "2. " << battleMon.getMove(2).getName() << " - " << battleMon.getMove(2).getRoll() <<endl;
-                std::cout << "3. Bag" << endl;
-                if (!mode) {std::cout << "4. Catch" << endl;}
+                if (!mode) {std::cout << "3. Catch" << endl;}
                 cin>>opt;
             }
             
             std::cout << "-------------------------------------------------------------------\n" << endl;
             
             //check if opt is 1-2 or 3-4 to include different behavior for Catch() and Bag()
-            selected = battleMon.getMove(opt);
-            cout << "You chose " << selected.getName() << " ." << endl;
+            selectedMove = battleMon.getMove(opt);
+            cout << "You chose " << selectedMove.getName() << " ." << endl;
             cout << "Time to roll the die." << endl;
             PlayerRoll = DieRoll();
             
@@ -177,36 +177,51 @@ void Player::BattleSequence(bool mode, int numMon)
             
             std::cout<<"You rolled a " << PlayerRoll << endl;
             
-            if (PlayerRoll >= selected.getRoll()){
+            if (PlayerRoll >= selectedMove.getRoll()){
                 std::cout << "Your " << battleMon.GetName() << " missed!" << endl;
             }
             else{
-                damage = Battle(battleMon, enemyMon, selected);
+                damage = Battle(battleMon, enemyMon, selectedMove);
                 std::cout << "The opposing " << enemyMon.GetName() << " has taken " << damage << " damage!" << endl;
+            }
+            if(enemyMon.GetHP() <=0 ){
+                std::cout << "You have defeated " << enemyMon.GetName() <<endl;
+                enemyDefeated=true;
+                battleMon.ModifyEXP(enemyMon.lvl);
+                enemies.pop();
+                if(enemies.size()==0){
+                    cout<< "You have defeated  trainer EnterEnemyTrainer'sName"<<endl;
+                    OptionSelect();
+                }
+
             }
         }
         else{
-            PlayerRoll = (rand() % 2) + 1;
-            selected = enemyMon.getMove(PlayerRoll);
-            PlayerRoll = DieRoll();
+            if(enemyDefeated==true){
+                enemyMon=enemies.front();  
+             }else{
+                    PlayerRoll = (rand() % 2) + 1;
+                    selectedMove = enemyMon.getMove(PlayerRoll);
+                    PlayerRoll = DieRoll();
             
-            //enemy name
-            std::cout<<"Enemy rolled a " << PlayerRoll << endl;
+                    //enemy name
+                    std::cout<<"Enemy rolled a " << PlayerRoll << endl;
             
-            if (PlayerRoll >= selected.getRoll()){
-                std::cout << "The opposing " << battleMon.GetName() << " missed!" << endl;
-            }
-            else{
-                damage = Battle(battleMon, enemyMon, selected);
-                std::cout << "Your " << enemyMon.GetName() << " has taken " << damage << " damage!" << endl;
-            }
+                    if (PlayerRoll >= selectedMove.getRoll()){
+                        std::cout << "The opposing " << battleMon.GetName() << " missed!" << endl;
+                    }
+                    else{
+                        damage = Battle(battleMon, enemyMon, selectedMove);
+                        std::cout << "Your " << enemyMon.GetName() << " has taken " << damage << " damage!" << endl;
+                    }
+                }
         }
+        yourTurn= !yourTurn;
     }
     
     //leave if anyone dies
     
 }
-
 int Player::Battle(Pokemon attacking, Pokemon defending, Move sel){
     return 1;
 }
