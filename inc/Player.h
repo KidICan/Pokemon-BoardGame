@@ -39,6 +39,8 @@ public:
 	void OptionSelect();
 
 	bool TryCatch();
+    
+    bool isNumeric(string s);
 
 	void BattleSequence(bool, int);
     
