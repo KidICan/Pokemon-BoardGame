@@ -18,7 +18,7 @@ Player::Player(){
 
 void Player::GetName(){
     std::string n;
-    std::cin>>n;
+    std::cin >> n;
     this->name=n;
 }
 
@@ -29,8 +29,8 @@ int Player::DieRoll()
     return dieRole;
 }
 
-void Player:: PlayerName(){
-    std::cout<<name;
+void Player::PlayerName(){
+    std::cout << name;
 }
 
 void Player::SetOption(){
@@ -52,15 +52,28 @@ int Player::GetGender(){
     return gender;
 }
 
+bool Player::isNumeric(string s){
+    if (s.length() == 0) {
+        return false;
+    }
+    
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (!isdigit(s[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 void Player::OptionSelect()
 {
     int opt;
     
-    
-    
     std::cout<<"What are we doing next?"<<endl;
     std::cout<<"Press 1 to go to the Shop."<<endl;
-    std::cout<<"Press 2 to go to  YourBag."<<endl;
+    std::cout<<"Press 2 to go to YourBag."<<endl;
     std::cout<<"Press 3 to go to Try&Catch."<<endl;
     std::cout<<"Press 4 to go to TrainerBattle."<<endl;
     
@@ -91,6 +104,7 @@ void Player::OptionSelect()
     
 }
 
+//Mode = if TrainerBattle
 void Player::BattleSequence(bool mode, int numMon)
 {
     //Here we randomize the roll and the pokemon selection.
@@ -109,7 +123,7 @@ void Player::BattleSequence(bool mode, int numMon)
     //Here we define a pokemons variable to access the players pokemon
     Pokemon battleMon;
     Pokemon enemyMon = enemies[0];
-    int opt = 0;
+    int opt;
     //Here we start to find the wild pokiman in out Mon vector and select.
     
     if (!mode){
@@ -131,6 +145,7 @@ void Player::BattleSequence(bool mode, int numMon)
     {
         if (yourTurn)
         {
+            opt = 0;
             std::cout<< "What will " << battleMon.GetName() << " do?" << endl;
             std::cout<< "1. " << battleMon.getMove(1).getName() << " - " << battleMon.getMove(1).getRoll() <<endl;
             std::cout<< "2. " << battleMon.getMove(2).getName() << " - " << battleMon.getMove(2).getRoll() <<endl;
@@ -143,7 +158,8 @@ void Player::BattleSequence(bool mode, int numMon)
                 std::cout<< "Please input one of the following." << endl;
                 std::cout<< "1. " << battleMon.getMove(1).getName() << " - " << battleMon.getMove(1).getRoll() <<endl;
                 std::cout<< "2. " << battleMon.getMove(2).getName() << " - " << battleMon.getMove(2).getRoll() <<endl;
-                if (!mode) {std::cout << "3. Catch" << endl;}
+                std::cout << "3. Bag" << endl;
+                if (!mode) {std::cout << "4. Catch" << endl;}
                 cin>>opt;
             }
             

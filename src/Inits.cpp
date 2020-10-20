@@ -32,5 +32,11 @@ map<string, Pokemon> Inits::initMon(){
     
     tMon["Mew"] = Pokemon ("Mew", 1, 100, 5, dMove["Electrocute"], dMove["Bash"]);
     
+    tMon["Bulbasaur"] = Pokemon ("Bulbasaur", 1, 50, 5, dMove["Electrocute"], dMove["Bash"]);
+    
+    tMon["Charmander"] = Pokemon ("Charmander", 1, 50, 5, dMove["Electrocute"], dMove["Bash"]);
+    
+    tMon["Squirtle"] = Pokemon ("Squirtle", 1, 50, 5, dMove["Electrocute"], dMove["Bash"]);
+    
     return tMon;
 }

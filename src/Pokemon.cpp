@@ -27,7 +27,7 @@ int Move::getPower(){
 int Move::getRoll(){
     return roll;
 }
-	
+
 Pokemon::Pokemon(){
     name = "po";
     mhp = 0;
@@ -113,13 +113,6 @@ int Pokemon::GetLvl()
 
 void Pokemon::LevelUp()
 {
-	lvl+=1;
+    lvl += 1;
+    cout << name << " has leveled up to Level " << lvl << " !" << endl;
 }
-
-
-
-
-	
-
-
-
