@@ -14,13 +14,13 @@ map<string, Move> Inits::initMoves(){
     map<string, Move> tMap;
     
     //all moves will currently have base 5 power value.
-    tMap["Psyshock"] = Move ("Psyshock", 5, 6);
+    tMap["Psyshock"] = Move ("Psyshock", 2, 2);
     
-    tMap["Mind Strike"] = Move ("Mind Strike", 5, 4);
+    tMap["Mind Strike"] = Move ("Mind Strike", 2, 2);
     
-    tMap["Bash"] = Move ("Bash", 5, 2);
+    tMap["Bash"] = Move ("Bash", 1, 2);
     
-    tMap["Electrocute"] = Move ("Electrocute", 5, 5);
+    tMap["Electrocute"] = Move ("Electrocute", 1, 2);
     
     return tMap;
 }
@@ -28,15 +28,15 @@ map<string, Move> Inits::initMoves(){
 map<string, Pokemon> Inits::initMon(){
     map<string, Pokemon> tMon;
     
-    tMon["Mewtwo"] = Pokemon ("Mewtwo", 1, 75, 5, dMove["Psyshock"], dMove["Mind Strike"]);
+    tMon["Mewtwo"] = Pokemon ("Mewtwo", 1, 7, 5, dMove["Psyshock"], dMove["Mind Strike"]);
     
-    tMon["Mew"] = Pokemon ("Mew", 1, 100, 5, dMove["Electrocute"], dMove["Bash"]);
+    tMon["Mew"] = Pokemon ("Mew", 1, 10, 5, dMove["Electrocute"], dMove["Bash"]);
     
-    tMon["Bulbasaur"] = Pokemon ("Bulbasaur", 1, 50, 5, dMove["Electrocute"], dMove["Bash"]);
+    tMon["Bulbasaur"] = Pokemon ("Bulbasaur", 1, 5, 5, dMove["Electrocute"], dMove["Bash"]);
     
-    tMon["Charmander"] = Pokemon ("Charmander", 1, 50, 5, dMove["Electrocute"], dMove["Bash"]);
+    tMon["Charmander"] = Pokemon ("Charmander", 1, 5, 5, dMove["Electrocute"], dMove["Bash"]);
     
-    tMon["Squirtle"] = Pokemon ("Squirtle", 1, 50, 5, dMove["Electrocute"], dMove["Bash"]);
+    tMon["Squirtle"] = Pokemon ("Squirtle", 1, 5, 5, dMove["Electrocute"], dMove["Bash"]);
     
     return tMon;
 }

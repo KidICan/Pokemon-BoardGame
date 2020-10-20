@@ -28,13 +28,13 @@ int main()
     cout << "And though I could go on and on about how awesome I am, I want to know more about you." << endl;
     cin.ignore();
     cout << "First things first! What is your name?" << endl;
-    cin >> temp;
-    cout << "Just making sure, your name is " << temp << "?" << endl;
+    player1.GetName();
     
     bool first = false;
     string opt = "";
     while (player1.isNumeric(opt))
     {
+        cout << "Just making sure, your name is " << temp << "?" << endl;
         if (!first){cout << "Please select from the numbers." << endl;}
         cout << "1. Yes, that's my name." << endl;
         cout << "2. No, that's not my name." << endl;

@@ -26,7 +26,7 @@ void Player::GetName(){
 int Player::DieRoll()
 {
     srand(time(0));
-    int dieRole=rand()%6;
+    int dieRole=rand()%6+1;
     return dieRole;
 }
 
@@ -141,7 +141,7 @@ void Player::BattleSequence(bool mode, int numMon)
     bool yourTurn = true;
     bool enemyDefeated = false;
     Move selectedMove;
-    int damage;
+    //int damage;
     
     while(battleMon.GetHP() > 0 && enemyMon.GetHP() > 0 && enemies.size() >= 1)
     {
@@ -177,12 +177,13 @@ void Player::BattleSequence(bool mode, int numMon)
             
             std::cout<<"You rolled a " << PlayerRoll << endl;
             
-            if (PlayerRoll >= selectedMove.getRoll()){
+            if (PlayerRoll < selectedMove.getRoll()){
                 std::cout << "Your " << battleMon.GetName() << " missed!" << endl;
             }
             else{
-                damage = Battle(battleMon, enemyMon, selectedMove);
-                std::cout << "The opposing " << enemyMon.GetName() << " has taken " << damage << " damage!" << endl;
+                enemyMon.SetHp(enemyMon.GetHP()-selectedMove.power);
+                std::cout << "The opposing " << enemyMon.GetName() << " has taken " << selectedMove.power << " damage!" << endl;
+                std::cout << "The opposing " << enemyMon.GetName() << " has " << enemyMon.GetHP() << "HP left!"<<endl;
             }
             if(enemyMon.GetHP() <=0 ){
                 std::cout << "You have defeated " << enemyMon.GetName() <<endl;
@@ -207,12 +208,14 @@ void Player::BattleSequence(bool mode, int numMon)
                     //enemy name
                     std::cout<<"Enemy rolled a " << PlayerRoll << endl;
             
-                    if (PlayerRoll >= selectedMove.getRoll()){
+                    if (PlayerRoll < selectedMove.getRoll()){
                         std::cout << "The opposing " << battleMon.GetName() << " missed!" << endl;
                     }
                     else{
-                        damage = Battle(battleMon, enemyMon, selectedMove);
-                        std::cout << "Your " << enemyMon.GetName() << " has taken " << damage << " damage!" << endl;
+                        battleMon.SetHp(battleMon.GetHP()-selectedMove.power);
+                        std::cout << "Your " << battleMon.GetName() << " has taken " << selectedMove.power << " damage!" << endl;
+                        std::cout << "Your " << battleMon.GetName() << " has " << battleMon.GetHP() << "HP left!"<<endl;
+
                     }
                 }
         }
@@ -222,9 +225,10 @@ void Player::BattleSequence(bool mode, int numMon)
     //leave if anyone dies
     
 }
-int Player::Battle(Pokemon attacking, Pokemon defending, Move sel){
-    return 1;
-}
+// int Player::Battle(Pokemon attacking, Pokemon defending, Move sel){
+//     defending.SetHp(defending.GetHP()-sel.power);
+//      return sel.power;
+// }
 
 //This fucntion will only be calle when the randomizer >=2
 bool Player::TryCatch()
