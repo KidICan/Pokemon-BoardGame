@@ -4,20 +4,27 @@
 
 using namespace std;
 
+enum ItemType {Ball, Heal};
 typedef class Item
 {
 private:
-	std::string name;
-	int price;
-	
+    ItemType type;
+    string name;
+    int price;
+    int val; //generic val
+    
 public:
-
-	Item(string,int);
-
-	int GetPrice();
-
-	std::string GetName();
-	
-	
+    
+    Item();
+    
+    Item(ItemType, string, int, int);
+    
+    ItemType getType();
+    
+    string getName();
+    
+    int getPrice();
+    
+    int getVal();
 };
 #endif
