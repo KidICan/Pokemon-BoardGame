@@ -1,21 +1,32 @@
 #include <Item.h>
 #include <iostream>
 
-
-Item::Item(string x, int y){
-
- name=x;
- 
- price=y;
-
+Item::Item(){
+    type = ItemType::Heal;
+    name = "";
+    price = 0;
+    val = 0;
 }
-	
-int Item::GetPrice(){
-		return price;
-		cout<<price;
-	}
-	
-	
-string Item::GetName(){
-		return name;
-	}
+
+Item::Item(ItemType i, string x, int p, int v){
+    type = i;
+    name = x;
+    price = p;
+    val = v;
+}
+
+ItemType Item::getType(){
+    return type;
+}
+
+string Item::getName(){
+    return name;
+}
+
+int Item::getPrice(){
+    return price;
+}
+
+int Item::getVal(){
+    return price;
+}

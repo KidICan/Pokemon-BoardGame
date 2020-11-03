@@ -1,14 +1,15 @@
 #include "Inits.h"
 #include <Pokemon.h>
 #include <string>
+#include <Item.h>
 #include <map>
 using namespace std;
 
 Inits::Inits(){
     dMove = initMoves();
     dMon = initMon();
+    dItem = initItems();
 }
-
 
 map<string, Move> Inits::initMoves(){
     map<string, Move> tMap;
@@ -39,4 +40,20 @@ map<string, Pokemon> Inits::initMon(){
     tMon["Squirtle"] = Pokemon ("Squirtle", 1, 5, 5, dMove["Electrocute"], dMove["Bash"]);
     
     return tMon;
+}
+
+map<string, Item> Inits::initItems(){
+    map<string, Item> tItem;
+    
+    Item temp = Item (ItemType::Heal, "Potion", 50, 20);
+    
+    tItem["Potion"] = Item (ItemType::Heal, "Potion", 50, 20);
+    
+    tItem["Pokeball"] = Item (ItemType::Ball, "Pokeball", 50, 10);
+    
+    tItem["Superball"] = Item (ItemType::Ball, "Superball", 100, 50);
+    
+    tItem["Hyper Potion"] = Item (ItemType::Heal, "Hyper Potion", 100, 60);
+    
+    return tItem;
 }
