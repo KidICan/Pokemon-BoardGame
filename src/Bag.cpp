@@ -1,18 +1,20 @@
 #include<Bag.h>
 #include<Pokemon.h>
 #include<Item.h>
+#include <Inits.h>
 #include <iostream>
 #include <unordered_map>
 
 extern vector <Pokemon>Mon;
 extern Bag bag;
+extern Inits repo;
 
 Bag::Bag(){
-
-    Items["pokeball"]=0;
-    Items["potion"]=0;
-    Items["super_potion"]=0;
-    Items["hyper_potion"]=0;
+    map<string, Item>::iterator it;
+    for (it = repo.dItem.begin(); it != repo.dItem.end(); it++)
+	{
+		Items[it->first]=0;
+	}
     PlayerMon;
     money=500;
 };
@@ -20,7 +22,7 @@ Bag::Bag(){
 
 void Bag::AddItm(string x, int y)
     {
-        Items.at(x)+=y;
+        Items[x]+=y;
     }
 
 int Bag::InsideBag(){

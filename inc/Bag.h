@@ -2,14 +2,14 @@
 #define BAG_H
 #include <Pokemon.h>
 #include <Item.h>
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 class Bag
 {
 private:
 
-unordered_map <string,int > Items;
+map <string,int > Items;
 
 vector <Pokemon> PlayerMon;
 
