@@ -5,6 +5,8 @@
 #include <map>
 #include <vector>
 
+enum BagState{Main, Trainer, Wild};
+
 class Bag
 {
 private:
@@ -17,25 +19,23 @@ int money;
 
 public:
 
+    Bag();
 
-		
-	Bag();
+    void AddItm(string, int);
 
-	void AddItm(string, int);
+    string InsideBag(BagState);
 
-	int InsideBag(bool);
+    void AddCatched(Pokemon);
 
-	void AddCatched(Pokemon);
+    int ViewCatchedMon();
 
-	int ViewCatchedMon();
+    Pokemon& MonSelect();
+    
+    int GetMoney();
+    
+    void SetMoney(int);
 
-	Pokemon& MonSelect();
-	
-	int GetMoney();
-	
-	void SetMoney(int);
-
-	int NoOneLeft();
+    int NoOneLeft();
 
 };
 #endif
