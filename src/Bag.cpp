@@ -5,9 +5,9 @@
 #include <iostream>
 #include <unordered_map>
 
-extern vector <Pokemon>Mon;
-extern Bag bag;
+extern vector <Pokemon> Mon;
 extern Inits repo;
+extern Bag bag;
 
 Bag::Bag(){
     map<string, Item>::iterator it;
@@ -28,10 +28,10 @@ string Bag::InsideBag(BagState tri){
     int opt = 0;
     bool notLeft = true;
     map<string, int>::iterator it;
-    if (tri == 0)
+    if (tri == BagState::Main)
     {
         for (it = Items.begin(); it != Items.end(); it++){
-            cout << it->first << " x" << it->second;
+            cout << it->first << " x" << it->second << endl;
         }
         cout << "Use item? (This will use an action)"<< endl;
         cout << "1. Yes" << endl;
@@ -50,7 +50,7 @@ string Bag::InsideBag(BagState tri){
         for (it = Items.begin(); it != Items.end(); it++){
             if (((tri == BagState::Main || tri == BagState::Trainer) && repo.dItem[it->first].getType() == ItemType::Heal) || (tri == BagState::Wild)){
                 counter++;
-                cout << counter << ". " << it ->first;
+                cout << counter << ". " << it ->first << endl;
             }
         }
         cout << "Which item would you like to use?" << endl;

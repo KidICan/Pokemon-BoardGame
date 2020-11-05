@@ -110,15 +110,17 @@ int main()
         player1.SetOption();
         cout << endl;
         
-        cout<<"You have chosen " << starters[player1.GetOption() - 1].GetName() << endl;;
+        int selPoke = player1.GetOption() - 1;
+        
+        cout<<"You have chosen " << starters[selPoke].GetName() << endl;;
         
         cout<<"Are you sure about this? 1 for yes, 0 for no. "<<endl;
         player1.SetOption();
         cout<<endl;
         if(player1.GetOption()==1)
         {
-            cout << starters[player1.GetOption() - 1].GetName() << " is now your new Pokiman Companion!!" << endl;
-            bag.AddCatched(starters[player1.GetOption() - 1]);
+            cout << starters[selPoke].GetName() << " is now your new Pokiman Companion!!" << endl;
+            bag.AddCatched(starters[selPoke]);
         }
     }
     

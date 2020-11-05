@@ -77,6 +77,21 @@ void Pokemon::SetHp(int h)
 	this->hp = h;
 }
 
+void Pokemon::modifyHP(int h)
+{
+    if (hp + h < 0)
+    {
+        hp = 0;
+    }
+    else if (hp + h > mhp)
+    {
+        hp = mhp;
+    }
+    else{
+        hp += h;
+    }
+}
+
 int Pokemon::GetHP()
 {
 	return hp;
@@ -118,5 +133,6 @@ void Pokemon::LevelUp()
 }
 
 void Pokemon::healPokemon(Item healingItem){
-    this->hp+= healingItem.getVal();
+    modifyHP(healingItem.getVal());
+    cout << name << " now has " << hp << " HP!" << endl;
 }
