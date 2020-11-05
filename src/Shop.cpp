@@ -56,7 +56,7 @@ void Shop(int money)
 			cout << endl;
 
 			//If the price of the item is greater than amount of money that the player has, then it will send them back to the option select menu
-			if (bag.GetMoney() < (repo.dItem[selectedItem].GetPrice() * itmAmount))
+			if (bag.GetMoney() < (repo.dItem[selectedItem].getPrice() * itmAmount))
 			{
 				cout << "Sadly though, you don't have enough money! Go fight more trianers, or sell your pokiman." << endl;
 			}
@@ -69,8 +69,8 @@ void Shop(int money)
 				cout << endl;
 				if (YorN = 1)
 				{
-					cout << "You bough " << itmAmount << " Pokeball!" << endl;
-					bag.SetMoney(bag.GetMoney() - (repo.dItem[selectedItem].GetPrice() * itmAmount));
+					cout << "You bough " << itmAmount << selectedItem << endl;
+					bag.SetMoney(bag.GetMoney() - (repo.dItem[selectedItem].getPrice() * itmAmount));
 					cout << "You now have " << bag.GetMoney() << " dollars." << endl
 						 << endl;
 					bag.AddItm(selectedItem, itmAmount);

@@ -13,8 +13,8 @@
 using namespace std;
 
 Player player1;
-Bag bag;
 Inits repo;
+Bag bag;
 vector<Pokemon> Mon;
 
 int main()

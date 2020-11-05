@@ -90,7 +90,7 @@ void Player::OptionSelect()
     
     if(opt==2)
     {
-        bag.InsideBag(false);
+        bag.InsideBag(BagState::Main);
         OptionSelect();
     }
     
@@ -161,10 +161,7 @@ void Player::BattleSequence(bool mode, int numMon)
                 std::cout<< "2. " << battleMon->getMove(2).getName() << " - " << battleMon->getMove(2).getRoll() <<endl;
                 if (!mode) {std::cout << "3. Catch" << endl;}
                 cin>>opt;
-                /*
-                Here we 
                 
-                */
             }
             
             std::cout << "-------------------------------------------------------------------\n" << endl;
