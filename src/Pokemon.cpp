@@ -116,3 +116,7 @@ void Pokemon::LevelUp()
     lvl += 1;
     cout << name << " has leveled up to Level " << lvl << " !" << endl;
 }
+
+void Pokemon::healPokemon(Item healingItem){
+    this->hp+= healingItem.getVal();
+}

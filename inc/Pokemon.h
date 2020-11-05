@@ -1,6 +1,7 @@
 #ifndef POKEMON_H
 #define POKEMON_H
 #include <string>
+#include <Item.h>
 
 typedef class Move{
 
@@ -55,6 +56,8 @@ public:
 	virtual int GetLvl();
     
     virtual void LevelUp();
+    
+    virtual void healPokemon(Item);
 };
 
 #endif

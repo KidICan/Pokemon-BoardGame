@@ -25,8 +25,9 @@ void Bag::AddItm(string x, int y)
         Items[x]+=y;
     }
 
-int Bag::InsideBag(){
+int Bag::InsideBag(bool mode){
         int opt;
+        Pokemon* temp;
         cout<<"Would you like to see your pokiman or see your items?"<<endl;
         cout<<"1. Pokiman"<<endl;
         cout<<"2. Items"<<endl;
@@ -49,12 +50,14 @@ int Bag::InsideBag(){
 
             if(opt== 1)
             {
-                return Items.at("pokeball");
+                Items.at("pokeball")--;
+                
             }
 
             if(opt== 2)
             {
-                return Items.at("potion");
+                temp= &MonSelect();
+                temp->healPokemon(repo.dItem["Potion"]);
             }
 
             if(opt== 3)

@@ -23,7 +23,7 @@ public:
 
 	void AddItm(string, int);
 
-	int InsideBag();
+	int InsideBag(bool);
 
 	void AddCatched(Pokemon);
 
