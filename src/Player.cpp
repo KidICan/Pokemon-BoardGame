@@ -17,10 +17,12 @@ Player::Player(){
     opt=0;
 }
 
-void Player::GetName(){
-    std::string n;
-    std::cin >> n;
-    this->name=n;
+string Player::getName(){
+    return name;
+}
+
+void Player::setName(string n){
+    name = n;
 }
 
 int Player::DieRoll()
@@ -28,10 +30,6 @@ int Player::DieRoll()
     srand(time(0));
     int dieRole=rand()%6+1;
     return dieRole;
-}
-
-void Player::PlayerName(){
-    std::cout << name;
 }
 
 void Player::SetOption(){
@@ -68,6 +66,23 @@ bool Player::isNumeric(string s){
     return true;
 }
 
+int Player::returnInt(string s){
+    if(isNumeric(s)){
+        return stoi(s);
+    }
+    return -1;
+}
+
+bool Player::isValidInputRange(string s, int a, int b){
+    bool val = false;
+    int t = returnInt(s);
+    val = (t >= a && t <= b);
+    if (!val){
+        cout << "Please input a number between " << a << " and " << b << "." << endl;
+    }
+    return val;
+}
+
 void Player::OptionSelect()
 {
     int opt;
@@ -77,7 +92,6 @@ void Player::OptionSelect()
     std::cout<<"Press 2 to go to YourBag."<<endl;
     std::cout<<"Press 3 to go to Try&Catch."<<endl;
     std::cout<<"Press 4 to go to TrainerBattle."<<endl;
-    
     
     cin>>opt;
     std::cout<<endl;
@@ -161,7 +175,6 @@ void Player::BattleSequence(bool mode, int numMon)
                 std::cout<< "2. " << battleMon->getMove(2).getName() << " - " << battleMon->getMove(2).getRoll() <<endl;
                 if (!mode) {std::cout << "3. Catch" << endl;}
                 cin>>opt;
-                
             }
             
             std::cout << "-------------------------------------------------------------------\n" << endl;
@@ -237,7 +250,6 @@ bool Player::TryCatch()
     int Roll= DieRoll();
     Pokemon battleMon;
     
-    
     std::cout<<"Lets try an catch some PokiMan!"<<endl;
     std::cout<<"Time to roll the Die"<<endl;
     std::cout<<"Press enter to roll the die"<<endl;
@@ -257,6 +269,3 @@ bool Player::TryCatch()
         
     }
 }
-
-
-

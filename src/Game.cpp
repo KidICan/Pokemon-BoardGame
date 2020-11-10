@@ -20,7 +20,8 @@ vector<Pokemon> Mon;
 int main()
 {
     vector<Pokemon> starters = {repo.dMon["Bulbasaur"], repo.dMon["Charmander"], repo.dMon["Squirtle"]};
-    string temp;
+    string opt;
+    string opt2;
     cout << "Welcome to the World of Pokiman. (Press Enter to continue)"<< endl;
     cin.ignore();
     cout << "My name is Professor Mike Hawk. I'm a former League Champion." << endl;
@@ -28,40 +29,57 @@ int main()
     cout << "And though I could go on and on about how awesome I am, I want to know more about you." << endl;
     cin.ignore();
     cout << "First things first! What is your name?" << endl;
-    player1.GetName();
+    cin >> opt2;
     
-    bool first = false;
-    string opt = "";
-    while (player1.isNumeric(opt))
+    opt = "-1";
+    cout << "Just making sure, your name is " << opt2 << "?" << endl;
+    while (!player1.isValidInputRange(opt, 1, 2) || player1.returnInt(opt) == 2)
     {
-        cout << "Just making sure, your name is " << temp << "?" << endl;
-        if (!first){cout << "Please select from the numbers." << endl;}
-        cout << "1. Yes, that's my name." << endl;
-        cout << "2. No, that's not my name." << endl;
-        cin >> opt;
+        if (player1.returnInt(opt) == 2){
+            cout << "Okay then, what's your name?" << endl;
+            opt = "-1";
+            cin >> opt2;
+        }
+        else{
+            cout << "Just making sure, your name is " << opt2 << "?" << endl;
+            cout << "1. Yes, that's my name." << endl;
+            cout << "2. No, that's not my name." << endl;
+            cin >> opt;
+        }
+        cout << "---------------------------------------------------" << endl;
     }
     
-    while(player1.GetOption() == 2)
+    player1.setName(opt2);
+    
+    cout << "------------------------------------------------------" << endl;
+    
+    cout << "Ah so your name is " << player1.getName() << endl;
+    
+    
+    opt = "-1";
+    
+    while (!player1.isValidInputRange(opt, 1, 2) || player1.returnInt(opt) == 0)
     {
-        cout<<"Sorry, my bad, what's your name?"<<endl;
-        player1.GetName();
-        cout<<endl;
-        
-        cout<<"Is ";
-        player1.PlayerName();
-        cout<<" correct ? 0 for no, 1 for yes"<<endl;
-        player1.SetOption();
-        cout<<endl;
+        if (player1.returnInt(opt) == 0){
+            cout << "Okay then, which one?" << endl;
+            opt = "-1";
+            cout << "1. Boy" << endl;
+            cout << "2. Girl" << endl;
+        }
+        else{
+            out << "Now tell me, are you a boy or a girl?" << endl;
+            cout << "1. Boy" << endl;
+            cout << "2. Girl" << endl;
+            cin >> opt;
+            //this is wrong but it's a start
+            
+            cout << "Just making sure, you are a " << opt2 << "?" << endl;
+            cout << "1. Yes, that's correct." << endl;
+            cout << "0. No, that's wrong" << endl;
+            cin >> opt;
+        }
+        cout << "---------------------------------------------------" << endl;
     }
-    
-    cout << "-------------------------------------------------------------------\n" << endl;
-    
-    cout << "Awesome!" <<endl;
-    cout << "Your name is ";
-    player1.PlayerName();
-    cout << endl;
-    cout << "Now tell me, are you a boy or a girl? " << endl;
-    cout << "If you are a boy press 1, if you are a girl, press 0." << endl;
     
     player1.SetGender();
     
@@ -94,9 +112,7 @@ int main()
     
     cout << "-------------------------------------------------------------------\n" << endl;
     
-    cout<<"Great! Nice to meet you ";
-    player1.PlayerName();
-    cout<<" !" <<endl;
+    cout<<"Great! Nice to meet you " << player1.getName() << "!" <<endl;
     cout<<"\nFor you to be able to become the very best, you are going to need a partner." << endl;
     cout<<"Please select from one of the three pokemon available." << endl;
     
