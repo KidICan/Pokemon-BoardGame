@@ -13,18 +13,17 @@ class Player
 {
 private:
 	int gender;
-	std::string name;
-	int YorN;
+	string name;
 	int opt;
 	
-
 public:
 	
 	Player();
 	//here we simply set the values for each value for the player
-	void GetName();
-	
-	void PlayerName();
+    
+    string getName();
+
+    void setName(string);
 
 	int DieRoll();
 
@@ -41,8 +40,12 @@ public:
 	bool TryCatch();
     
     bool isNumeric(string s);
+    
+    int returnInt(string);
 
 	void BattleSequence(bool, int);
+    
+    bool isValidInputRange(string, int, int);
     
     //int Battle(Pokemon, Pokemon, Move);
 
