@@ -15,9 +15,9 @@ map<string, Move> Inits::initMoves(){
     map<string, Move> tMap;
     
     //all moves will currently have base 5 power value.
-    tMap["Psyshock"] = Move ("Psyshock", 2, 2);
+    tMap["Psyshock"] = Move ("Psyshock", 1, 2);
     
-    tMap["Mind Strike"] = Move ("Mind Strike", 2, 2);
+    tMap["Mind Strike"] = Move ("Mind Strike", 1, 2);
     
     tMap["Bash"] = Move ("Bash", 1, 2);
     
